@@ -38,14 +38,39 @@
             justify-content: center;
         }
 
-        .main-card { 
-            background: white; 
-            padding: 25px; 
-            border-radius: 20px; 
-            box-shadow: var(--card-shadow);
-            position: sticky;
-            top: 20px;
-        }
+    .main-card { 
+    background: white; 
+    padding: 25px; 
+    border-radius: 20px; 
+    box-shadow: var(--card-shadow);
+    
+    /* Konfigurasi Sticky */
+    position: sticky;
+    top: 20px;
+    
+    /* PERBAIKAN: Ruang scroll yang lebih aman */
+    max-height: calc(100vh - 120px); /* Memberi ruang lebih besar untuk header/browser UI */
+    height: fit-content; /* Mencegah form meregang mengikuti tinggi kolom daftar produk */
+    
+    /* Aturan Scroll */
+    overflow-y: auto; 
+    overflow-x: hidden; 
+}
+
+/* Styling khusus scrollbar untuk main-card */
+.main-card::-webkit-scrollbar {
+    width: 6px;
+}
+.main-card::-webkit-scrollbar-track {
+    background: transparent;
+}
+.main-card::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+.main-card::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
 
         .product-card {
             background: white;
