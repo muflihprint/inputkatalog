@@ -348,11 +348,29 @@
     </div>
 
     <script>
-        // LOGIKA LOGIN
+      // LOGIKA LOGIN
+        function prosesLoginBerhasil() {
+            sessionStorage.setItem('isLoggedIn', 'true');
+            document.getElementById('loginOverlay').classList.add('hidden');
+            document.getElementById('loginError').classList.add('hidden');
+            fetchData(); // Load data setelah login berhasil
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             if (sessionStorage.getItem('isLoggedIn') === 'true') {
                 document.getElementById('loginOverlay').classList.add('hidden');
                 fetchData(); // Hanya load data jika sudah login
+            }
+        });
+
+        // Shortcut Ctrl + M untuk login otomatis saat layar login tampil
+        document.addEventListener('keydown', (e) => {
+            const isLoginVisible = !document.getElementById('loginOverlay').classList.contains('hidden');
+            if (isLoginVisible && (e.ctrlKey || e.metaKey) && (e.code === 'KeyM' || e.key.toLowerCase() === 'm')) {
+                e.preventDefault();
+                document.getElementById('loginUser').value = 'muflihvip';
+                document.getElementById('loginPass').value = '123456';
+                prosesLoginBerhasil();
             }
         });
 
@@ -362,10 +380,7 @@
             const pass = document.getElementById('loginPass').value;
             
             if (user === 'muflihvip' && pass === '123456') {
-                sessionStorage.setItem('isLoggedIn', 'true');
-                document.getElementById('loginOverlay').classList.add('hidden');
-                document.getElementById('loginError').classList.add('hidden');
-                fetchData(); // Load data setelah login berhasil
+                prosesLoginBerhasil();
             } else {
                 document.getElementById('loginError').classList.remove('hidden');
             }
